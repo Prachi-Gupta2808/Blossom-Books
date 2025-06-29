@@ -24,8 +24,10 @@ const SplashScreen = () => {
       <h1 className="text-6xl md:text-8xl font-serif font-bold text-white">
         Blossom Books
       </h1>
-      <p className="mt-4 text-white text-sm md:text-base animate-bounce opacity-70">
-        Scroll down ↓
+
+      {/* Scroll down text at bottom of screen */}
+      <p className="absolute bottom-6 text-white text-xs md:text-sm opacity-70 animate-bounce">
+        Scroll down to continue ↓
       </p>
     </div>
   );
