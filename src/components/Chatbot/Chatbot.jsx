@@ -58,62 +58,59 @@ const App = () => {
   }, [chatHistory]);
 
   return (
-    <>
-      <div className={`chatbot-container`}>
-        <button onClick={() => setShowChatbot((prev) => !prev)} id="chatbot-toggler">
-          <span className="material-symbols-rounded">menu_book</span>
-          <span className="material-symbols-rounded">close</span>
-        </button>
-      </div>
+    <div className={`chatbot-container ${showChatbot ? 'show-chatbot' : ''}`}>
+      {/* Toggle Button */}
+      <button onClick={() => setShowChatbot((prev) => !prev)} id="chatbot-toggler">
+        <span className="material-symbols-rounded">menu_book</span>
+        <span className="material-symbols-rounded">close</span>
+      </button>
 
+      {/* Chatbot Popup */}
       {showChatbot && (
-        <div className="chatbot-container show-chatbot">
-          <div className="chatbot-popup">
-            <div className="chat-header">
-              <div className="header-info">
-                <ChatbotIcon />
-                <h2 className="logo-text">BookBot</h2>
-              </div>
-
-              <button
-                type="button"
-                className="material-symbols-rounded chatbot-close-button"
-                aria-label="Close chatbot"
-                onClick={() => {
-                  console.log("Clicked close button");
-                  setShowChatbot(false);
-                }}
-              >
-                keyboard_arrow_down
-              </button>
+        <div className="chatbot-popup">
+          <div className="chat-header">
+            <div className="header-info">
+              <ChatbotIcon />
+              <h2 className="logo-text">BookBot</h2>
             </div>
 
-            <div ref={chatBodyRef} className="chat-body">
-              <div className="message bot-message">
-                <ChatbotIcon />
-                <p className="message-text">
-                  Hey there book worm!✨
-                  <br />
-                  What can I help you with today?
-                </p>
-              </div>
+            <button
+              type="button"
+              className="material-symbols-rounded chatbot-close-button"
+              aria-label="Close chatbot"
+              onClick={() => {
+                setShowChatbot(false);
+              }}
+            >
+              keyboard_arrow_down
+            </button>
+          </div>
 
-              {chatHistory.map((chat, index) => (
-                <ChatMessage key={index} chat={chat} />
-              ))}
+          <div ref={chatBodyRef} className="chat-body">
+            <div className="message bot-message">
+              <ChatbotIcon />
+              <p className="message-text">
+                Hey there book worm!✨
+                <br />
+                What can I help you with today?
+              </p>
             </div>
 
-            <div className="chat-footer">
-              <ChatForm
-                chatHistory={chatHistory}
-                setChatHistory={setChatHistory}
-                generateBotResponse={generateBotResponse}
-              />
-            </div>
+            {chatHistory.map((chat, index) => (
+              <ChatMessage key={index} chat={chat} />
+            ))}
+          </div>
+
+          <div className="chat-footer">
+            <ChatForm
+              chatHistory={chatHistory}
+              setChatHistory={setChatHistory}
+              generateBotResponse={generateBotResponse}
+            />
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
